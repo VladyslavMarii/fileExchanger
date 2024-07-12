@@ -16,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@CrossOrigin(origins = "http://localhost")
 public class FileController {
     private final DocumentService documentService;
 
