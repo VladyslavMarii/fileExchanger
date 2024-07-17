@@ -1,0 +1,34 @@
+services:
+#  postgres:
+#    image: postgres:15
+#    container_name: postgres
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 2004
+#      POSTGRES_DB: files-exchanger
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: file-exchanger-back
+    container_name: file-exchanger-back
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/files-exchanger
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 2004
+    ports:
+      - "8080:8080"
+    network_mode: bridge
+    #for starting on one component
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+#    depends_on:
+#      - postgres
+
+#volumes:
+#  postgres_data:
